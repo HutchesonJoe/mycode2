@@ -1,0 +1,26 @@
+---
+- name: Playbook to practice Ansible mdules
+  hosts: planetexpress
+  connection: ssh # default/ this is optional
+  gather_facts: True
+
+  tasks:
+    - name: Print some info from hosts
+      debug:
+        var: ansible_date_time.date
+
+
+    - name: create new directory on hosts
+      become: true
+      file:
+        path: "{{ ansible_date_time.date }}"
+        state: directory
+
+    - name: create new file in directory
+      template:
+        src: templates/this_user.info.j2
+        dest: "{{ ansible_date_time.date }}/this_user.info"
+        owner: "{{ fileuser }}"
+        group: "{{ fileuser }}"
+        mode: "0755"
+      become: true 

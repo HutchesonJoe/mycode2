@@ -1,0 +1,5 @@
+User: {{ fileuser|upper }}
+Date: {{ ansible_date_time.date }}
+Time: {{ ansible_date_time.time }}
+OS Family: {{ ansible_facts.os_family }}
+
