@@ -1,0 +1,13 @@
+---
+- name: a Clean-Up Playbook for Planet Express
+  hosts: planetexpress
+  connection: ssh # default/ this is optional
+  gather_facts: True
+  
+  tasks:
+    - name: Delete directory and files from hosts
+      become: True
+      file:
+        path: 2023-02-05
+        state: absent
+

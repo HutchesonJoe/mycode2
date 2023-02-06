@@ -7,8 +7,7 @@
   tasks:
     - name: Print some info from hosts
       debug:
-        var: ansible_date_time.date
-
+        var: ansible_date_time.date, ansible_user, ansible_all_ipv4_addresses, ansible_distribution, ansible_interfaces
 
     - name: create new directory on hosts
       become: true
@@ -17,6 +16,8 @@
         state: directory
 
     - name: create new file in directory
+      vars:
+        message: "What's up?"
       template:
         src: templates/this_user.info.j2
         dest: "{{ ansible_date_time.date }}/this_user.info"
